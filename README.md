@@ -1,2 +1,5 @@
-# WUSTL-data-analytics-bootcamp
-WUSTL Data Analytics Boot Camp
+# WUSTL Data Analytics Boot Camp Homework
+**06/2018 to 12/2018**
+
+- HW03-python
+- HW04-pandas

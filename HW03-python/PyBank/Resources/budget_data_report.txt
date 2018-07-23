@@ -1,0 +1,9 @@
+------------------------------------------
+Financial Analysis
+------------------------------------------
+Total Months                :	        41
+Total Revenue               :	18,971,412
+Average Change              :	   462,717
+Greatest Increase in Sep-15 :	 1,195,111
+Greatest Decrease in Aug-14 :	-1,172,384
+
