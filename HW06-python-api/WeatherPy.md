@@ -343,3 +343,9 @@ plt.show()
 
 ![png](Resources/WindSpeed.Latitude.png)
 
+### Observable Trends
+>Wind speeds that are above 20 mph tend to occur when the temperature above 70 degrees
+
+>Humidity does not seem to have a correlation to latitude. Several varying latitudes have humidity ranging from 40 to 100%.
+
+>Between 20 and 40 degrees latitude is the city that is the hottest, has the most cloud cover, most humid and no wind.
