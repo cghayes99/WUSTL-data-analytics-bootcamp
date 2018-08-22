@@ -809,3 +809,4 @@ plt.show()
 >Oddly, the drug Ketapril and the Placebo show the same statistics in all three categories. It is a possible conclusion that both drugs share similar components. The surival rates are comparable to the placebo at the end of the treatment.
 
 >Infubinal would be the worst.  This group, however, experienced the lowest surival rates of the two other treatments and the placebo.     
+	
