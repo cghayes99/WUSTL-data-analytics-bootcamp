@@ -5,3 +5,5 @@
 - HW04-pandas
 - HW05-matplotlib
 - HW06-python-api
+- HW10-sql
+
