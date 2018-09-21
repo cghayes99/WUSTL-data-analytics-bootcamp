@@ -1,7 +1,6 @@
 # Mission to Mars
 
 #### Flast App; supporting script(s)
-
 ```
 ├── app
 │   ├── index.html
@@ -32,4 +31,4 @@
     └── Mission.to.Mars_template.html
 ```    
 
-#### Static Page: [Mission To Mars](https://cghayes99.github.io/Mission.To.Mars)
+#### View Page: [Mission To Mars](https://cghayes99.github.io/Mission.To.Mars)
