@@ -1,6 +1,6 @@
 # Mission to Mars
 
-#### Flast App; supporting script(s)
+#### Flask App; supporting script(s)
 ```
 ├── app
 │   ├── index.html
