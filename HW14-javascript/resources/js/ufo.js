@@ -4,6 +4,7 @@ var tableData = data;
 var counter = 0;
 var btnSearch = d3.select("#btn-search");
 var btnReset = d3.select("#btn-reset");
+var searchControls = d3.selectAll(".form-control");
 
 //****************** init *****************************//
 init();
@@ -30,6 +31,19 @@ btnReset.on("click", function() {
     resetForm();
 });
 
+searchControls.on("input", function() {
+    var currentControl = this;
+    d3.selectAll("input").each(function() {
+        if (this != currentControl) {
+            this.disabled = true;
+        }
+    });
+    d3.selectAll("select").each(function() {
+        if (this != currentControl) {
+            this.disabled = true;
+        }
+    });
+});
 
 /* Functions
 ============================================= */
@@ -77,12 +91,6 @@ function filterDataTable(parms, counter) {
     filteredData.push(filteredCountry);
     filteredData.push(filteredShape);
 
-    console.log("filteredDatetime.length => " + filteredDatetime.length);
-    console.log("filteredShape.length    => " + filteredShape.length);
-    console.log("filteredCity.length     => " + filteredCity.length);
-    console.log("filteredState.length    => " + filteredState.length);
-    console.log("filteredCountry.length  => " + filteredCountry.length);
-
     // previous,current count
     d3.select("table").attr("data-count-previous", d3.select("table").attr("data-count"));
     d3.select("table").attr("data-count", counter);
@@ -103,6 +111,8 @@ function resetForm() {
     d3.select("tbody").selectAll("tr").classed("ufo--hide", false);
     d3.selectAll("input").property("value", "");
     d3.selectAll("select").property("selectedIndex", 0);
+    d3.selectAll("input").property("disabled", false);
+    d3.selectAll("select").property("disabled",false);
 }
 
 

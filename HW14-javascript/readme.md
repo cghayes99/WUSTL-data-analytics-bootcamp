@@ -1,9 +1,8 @@
 # UFO Sightings ALIENS-R-REAL
 
-#### HTML, CSS, JS & Images
+#### Assets: HTML, CSS, JavaScript, images
 ```
 ├── index.html
-├── index.html.save1
 └── resources
     ├── css
     │   └── ufo.style.css
