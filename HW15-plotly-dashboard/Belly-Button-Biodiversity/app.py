@@ -1,18 +1,16 @@
-import os
+#!/opt/anaconda3/bin/python
 
+import os, sqlalchemy
 import pandas as pd
 import numpy as np
 
-import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
-
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-
 
 #################################################
 # Database Setup
@@ -78,6 +76,11 @@ def sample_metadata(sample):
     print(sample_metadata)
     return jsonify(sample_metadata)
 
+@app.route("/wfreq/<sample>")
+def sample_metadata_wfreq(sample):
+    """Return the MetaData wfreq for a given sample."""
+    sample_metadata_wfreq = db.session.query(Samples_Metadata.WFREQ).filter(Samples_Metadata.sample==sample).all()
+    return jsonify(sample_metadata_wfreq[0][0])
 
 @app.route("/samples/<sample>")
 def samples(sample):
