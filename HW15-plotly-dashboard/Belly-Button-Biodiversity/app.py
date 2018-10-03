@@ -1,5 +1,4 @@
-#!/opt/anaconda3/bin/python
-
+## Imports
 import os, sqlalchemy
 import pandas as pd
 import numpy as np
@@ -10,46 +9,59 @@ from sqlalchemy import create_engine
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 
+## FLASH init
 app = Flask(__name__)
 
-#################################################
-# Database Setup
-#################################################
 
+## Database (SQLite init)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/bellybutton.sqlite"
 db = SQLAlchemy(app)
 
-# reflect an existing database into a new model
 Base = automap_base()
-# reflect the tables
 Base.prepare(db.engine, reflect=True)
 
-# Save references to each table
 Samples_Metadata = Base.classes.sample_metadata
 Samples = Base.classes.samples
 
 
 @app.route("/")
-def index():
+def get_index():
     """Return the homepage."""
     return render_template("index.html")
 
+@app.route("/delta3")
+def get_index_delta3():
+    """Return the homepage."""
+    return render_template("index-delta3.html")
 
+@app.route("/delta4")
+def get_index_delta4():
+    """Return the homepage."""
+    return render_template("index-delta4.html")
+
+
+'''
+	/names
+
+    @return names
+'''
 @app.route("/names")
-def names():
-    """Return a list of sample names."""
+def get_names():
+    sql = db.session.query(Samples).statement
+    df = pd.read_sql_query(sql, db.session.bind)
 
-    # Use Pandas to perform the sql query
-    stmt = db.session.query(Samples).statement
-    df = pd.read_sql_query(stmt, db.session.bind)
-
-    # Return a list of the column names (sample names)
     return jsonify(list(df.columns)[2:])
 
 
+'''
+	/metadata/<sample>
+
+    @param sample
+    @return metadata
+'''
 @app.route("/metadata/<sample>")
-def sample_metadata(sample):
-    """Return the MetaData for a given sample."""
+def get_sample_metadata(sample):
+
     sel = [
         Samples_Metadata.sample,
         Samples_Metadata.ETHNICITY,
@@ -62,36 +74,44 @@ def sample_metadata(sample):
 
     results = db.session.query(*sel).filter(Samples_Metadata.sample == sample).all()
 
-    # Create a dictionary entry for each row of metadata information
-    sample_metadata = {}
+    metadata = {}
     for result in results:
-        sample_metadata["sample"] = result[0]
-        sample_metadata["ETHNICITY"] = result[1]
-        sample_metadata["GENDER"] = result[2]
-        sample_metadata["AGE"] = result[3]
-        sample_metadata["LOCATION"] = result[4]
-        sample_metadata["BBTYPE"] = result[5]
-        sample_metadata["WFREQ"] = result[6]
+        metadata["sample"] = result[0]
+        metadata["ETHNICITY"] = result[1]
+        metadata["GENDER"] = result[2]
+        metadata["AGE"] = result[3]
+        metadata["LOCATION"] = result[4]
+        metadata["BBTYPE"] = result[5]
+        metadata["WFREQ"] = result[6]
 
-    print(sample_metadata)
-    return jsonify(sample_metadata)
+    return jsonify(metadata)
 
+
+'''
+	/wfreq/<sample>
+
+    @param sample
+    @return wfreq
+'''
 @app.route("/wfreq/<sample>")
-def sample_metadata_wfreq(sample):
-    """Return the MetaData wfreq for a given sample."""
-    sample_metadata_wfreq = db.session.query(Samples_Metadata.WFREQ).filter(Samples_Metadata.sample==sample).all()
-    return jsonify(sample_metadata_wfreq[0][0])
+def get_sample_metadata_wfreq(sample):
+    wfreq = db.session.query(Samples_Metadata.WFREQ).filter(Samples_Metadata.sample==sample).all()
+    return jsonify(wfreq[0][0])
 
+
+'''
+	/samples/<sample>
+
+    @param sample
+    @return otu_ids, otu_labels, sample_values
+'''
 @app.route("/samples/<sample>")
-def samples(sample):
-    """Return `otu_ids`, `otu_labels`,and `sample_values`."""
-    stmt = db.session.query(Samples).statement
-    df = pd.read_sql_query(stmt, db.session.bind)
+def get_samples(sample):
+    sql = db.session.query(Samples).statement
+    df = pd.read_sql_query(sql, db.session.bind)
 
-    # Filter the data based on the sample number and
-    # only keep rows with values above 1
     sample_data = df.loc[df[sample] > 1, ["otu_id", "otu_label", sample]]
-    # Format the data to send as json
+
     data = {
         "otu_ids": sample_data.otu_id.values.tolist(),
         "sample_values": sample_data[sample].values.tolist(),
@@ -100,5 +120,6 @@ def samples(sample):
     return jsonify(data)
 
 
+## Main functionality
 if __name__ == "__main__":
     app.run()

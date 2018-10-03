@@ -1,11 +1,19 @@
-body {
-    font-size: .875rem;
+/* dashboard-delta4.css */
+
+.bbb--samples {
+    padding-top: 1.25rem;
 }
 
-.feather {
-    width: 16px;
-    height: 16px;
-    vertical-align: text-bottom;
+.bbb--fluid {
+    width: 100%;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+body {
+    font-size: .875rem;
 }
 
 .sidebar {
@@ -29,10 +37,6 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     /* Scrollable contents if viewport is shorter than content. */
-}
-
-.bbb--samples {
-  padding-top: 1.25rem;
 }
 
 .sidebar .nav-link {
@@ -71,6 +75,12 @@ body {
     padding: .75rem 1rem;
     border-width: 0;
     border-radius: 0;
+}
+
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
 }
 
 .form-control-dark {
