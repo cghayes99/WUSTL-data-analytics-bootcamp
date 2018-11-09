@@ -25,3 +25,10 @@
   - [D3 Times](https://cghayes99.github.io/D3-Times/)
 - HW17-leaflet
   - [Earthquake Hazard Program](https://cghayes99.github.io/Earthquake-Hazard-Program)
+- HW18-project
+  - `Doorbusters` 
+	  - [http://doorbusters.bootcamp.brogard.io/](http://doorbusters.bootcamp.brogard.io/)
+	  - [https://github.com/cghayes99/Doorbusters](https://github.com/cghayes99/Doorbusters)
+- HW19-tableau
+	- [Dashboard Summary](https://public.tableau.com/profile/cghayes99#!/vizhome/CitiBikeMetricsDashboardSummary/DashboardSummary)
+  - [https://public.tableau.com/profile/cghayes99](https://public.tableau.com/profile/cghayes99) 
